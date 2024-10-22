@@ -3,14 +3,21 @@ package com.pluralsight.hotel;
 public class Room {
     private int numberOfBeds;
     private double price;
-    private boolean available;
+    private boolean occupied;
     private boolean dirty;
 
     public Room() {
         this.numberOfBeds = 1;
         this.price = 100.00;
-        this.available = true;
+        this.occupied = true;
         this.dirty = false;
+    }
+
+    public Room(int numberOfBeds, double price, boolean occupied, boolean dirty) {
+        this.numberOfBeds = numberOfBeds;
+        this.price = price;
+        this.occupied = occupied;
+        this.dirty = dirty;
     }
 
     public int getNumberOfBeds() {
@@ -21,12 +28,12 @@ public class Room {
         return price;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean isOccupied() {
+        return occupied;
     }
 
-    public boolean isOccupied() {
-        return !available;
+    public boolean isAvailable() {
+        return !occupied && !dirty;
     }
 
     public boolean isDirty() {
