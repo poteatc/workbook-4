@@ -5,7 +5,7 @@ public class Employee {
     private String name;
     private String department;
     private double payRate;
-    private int hoursWorked;
+    private double hoursWorked;
 
 
     public Employee(String employeeId, String name, String department, double payRate, int hoursWorked) {
@@ -16,11 +16,16 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
-    public int getOvertimeHours() {
+    public void punchTimeCard(double inTime, double outTime) {
+        double hoursToday = outTime - inTime;
+        hoursWorked += hoursToday;
+    }
+
+    public double getOvertimeHours() {
         return hoursWorked - 40;
     }
 
-    public int getRegularHours() {
+    public double getRegularHours() {
         if (hoursWorked <= 40) {
             return hoursWorked;
         } else {

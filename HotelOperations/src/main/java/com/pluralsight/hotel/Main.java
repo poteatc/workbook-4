@@ -5,6 +5,18 @@ public class Main {
         Room room1 = new Room(2, 99.99, false, false);
         System.out.println("Is room 1 available? " + room1.isAvailable());
 
+        System.out.println("New guest arrived to check in to room 1...");
+        room1.checkIn();
+        System.out.println("Is room 1 available? " + room1.isAvailable());
+        room1.checkOut();
+        System.out.println("Guest checked out of room 1...");
+        System.out.println("Is room 1 available? " + room1.isAvailable());
+        room1.cleanRoom();
+        System.out.println("Housekeeping cleaned room 1!");
+        System.out.println("Is room 1 available? " + room1.isAvailable());
+
+
+
         Reservation res1 = new Reservation("king", 3, true);
         Reservation res2 = new Reservation("double", 3, false);
 
@@ -18,7 +30,14 @@ public class Main {
 
         System.out.printf("%s (employee #: %s) in the %s department earned $%.2f this week\n",
                 e1.getName(), e1.getEmployeeId(), e1.getDepartment(), e1.getTotalPay());
-        System.out.printf("%s (employee #: %s) in the %s department earned $%.2f this week\n",
+        System.out.printf("%s (employee #: %s) in the %s department earned $%.2f this week so far\n",
                 e2.getName(), e2.getEmployeeId(), e2.getDepartment(), e2.getTotalPay());
+
+        e2.punchTimeCard(10, 18.5);
+        System.out.println(e2.getName() + " punched in and out for today");
+
+        System.out.printf("%s (employee #: %s) in the %s department earned $%.2f this week so far\n",
+                e2.getName(), e2.getEmployeeId(), e2.getDepartment(), e2.getTotalPay());
+
     }
 }
