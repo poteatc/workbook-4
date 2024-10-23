@@ -1,11 +1,15 @@
 package com.pluralsight.hotel;
 
+import java.time.LocalDateTime;
+
 public class Employee {
     private String employeeId;
     private String name;
     private String department;
     private double payRate;
     private double hoursWorked;
+    private double punchInTime;
+    private double punchOutTime;
 
 
     public Employee(String employeeId, String name, String department, double payRate, int hoursWorked) {
@@ -19,6 +23,21 @@ public class Employee {
     public void punchTimeCard(double inTime, double outTime) {
         double hoursToday = outTime - inTime;
         hoursWorked += hoursToday;
+    }
+
+    public void punchIn(double time) {
+        this.punchInTime = time;
+    }
+
+    public void punchIn() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        double time = currentTime.getHour() + (currentTime.getMinute() / 60);
+        this.punchInTime = time;
+    }
+
+    public void punchOut(double time) {
+        this.punchOutTime = time;
+        hoursWorked += punchOutTime - punchInTime;
     }
 
     public double getOvertimeHours() {
