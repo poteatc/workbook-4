@@ -1,5 +1,7 @@
 package com.pluralsight.dealership;
 
+import java.util.Scanner;
+
 public class UserInterface {
     private Dealership dealership;
 
@@ -13,6 +15,17 @@ public class UserInterface {
 
     public void display() {
         init();
+        boolean done = false;
+        do {
+            System.out.println("""
+                    ~~~~~~~~~~~~~~~~~~~~
+                    |       Menu       |
+                    ~~~~~~~~~~~~~~~~~~~~
+                    
+                    """);
+            Scanner scanner = new Scanner(System.in);
+
+        } while (!done);
     }
 
     public void processGetByPriceRequest() {}
