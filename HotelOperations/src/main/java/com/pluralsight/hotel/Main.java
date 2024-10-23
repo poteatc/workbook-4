@@ -39,5 +39,11 @@ public class Main {
         System.out.printf("%s (employee #: %s) in the %s department earned $%.2f this week so far\n",
                 e2.getName(), e2.getEmployeeId(), e2.getDepartment(), e2.getTotalPay());
 
+        Hotel hotel = new Hotel("Wyndham", 50, 100, 25, 50);
+        System.out.println(hotel.bookRoom(25, true));
+        System.out.println(hotel.bookRoom(5, true));
+        System.out.println(hotel.bookRoom(50, false));
+        System.out.println(hotel.bookRoom(1, false));
+
     }
 }
