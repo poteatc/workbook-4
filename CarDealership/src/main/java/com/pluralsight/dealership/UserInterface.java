@@ -78,9 +78,14 @@ public class UserInterface {
     }
 
     private void displayVehicles(List<Vehicle> vehicles) {
+        System.out.println(ColorCodes.GREEN + "\nVehicles\n~~~~~~~~" + ColorCodes.RESET);
+        System.out.printf(ColorCodes.BLUE + "%-10s %-10s %-10s %-10s %-10s %-10s %-15s %5s\n",
+                "VIN", "Make", "Model", "Year", "Type", "Color", "Mileage", "Price");
+        System.out.println("---------------------------------------------------------------------------------------" + ColorCodes.RESET);
         for (Vehicle v: vehicles) {
             System.out.println(v);
         }
+        System.out.println();
     }
 
     public void processGetByPriceRequest() {}
