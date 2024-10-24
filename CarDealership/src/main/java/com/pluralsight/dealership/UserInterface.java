@@ -6,13 +6,15 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Dealership dealership;
+    DealershipFileManager dealershipFileManager;
 
     public UserInterface() {
 
     }
 
     private void init() {
-        this.dealership = new DealershipFileManager().getDealership();
+        this.dealershipFileManager = new DealershipFileManager();
+        this.dealership = dealershipFileManager.getDealership();
     }
 
     public void display() {
@@ -179,7 +181,42 @@ public class UserInterface {
         displayVehicles(dealership.getAllVehicles());
     }
 
-    public void processAddVehicleRequest() {}
+    public void processAddVehicleRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter a vehicle VIN: ");
+        String input = scanner.nextLine().toLowerCase().trim();
+        int vin = getPositiveIntegerInput(input);
+
+        System.out.println("Please enter a vehicle year: ");
+        input = scanner.nextLine().toLowerCase().trim();
+        int year = getPositiveIntegerInput(input);
+
+        System.out.println("Please enter a vehicle brand: ");
+        String make = scanner.nextLine();
+
+        System.out.println("Please enter a vehicle model: ");
+        String model = scanner.nextLine();
+
+        System.out.println("Please enter a vehicle type: ");
+        String type = scanner.nextLine();
+
+        System.out.println("Please enter a vehicle color: ");
+        String color = scanner.nextLine();
+
+        System.out.println("Please enter the vehicle's mileage: ");
+        input = scanner.nextLine().toLowerCase().trim();
+        int mileage = getPositiveIntegerInput(input);
+
+        System.out.println("Please enter the vehicle's price: ");
+        input = scanner.nextLine().toLowerCase().trim();
+        double price = getPositiveDoubleInput(input);
+
+        Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, mileage, price);
+        dealership.addVehicle(vehicle);
+
+        dealershipFileManager.saveDealership(dealership);
+    }
     public void processRemoveVehicleRequest() {}
 
     // Helper methods

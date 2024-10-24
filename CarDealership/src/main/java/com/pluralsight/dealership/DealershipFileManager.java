@@ -1,7 +1,6 @@
 package com.pluralsight.dealership;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class DealershipFileManager {
     // Load and read the inventory.csv file
@@ -36,7 +35,18 @@ public class DealershipFileManager {
         return dealership;
     }
 
-    public void saveDealership() {
-
+    public void saveDealership(Dealership dealership) {
+        try {
+            FileWriter fw = new FileWriter("src/main/resources/inventory-backup.csv");
+            BufferedWriter bw = new BufferedWriter(fw);
+            // Write first line of csv
+            bw.write(String.format("%s|%s|%s\n", dealership.getName(), dealership.getAddress(), dealership.getPhone()));
+            // Write all vehicles in csv format
+            for (Vehicle v : dealership.getAllVehicles()) {
+                bw.write(v.toCSVFormat() + "\n");
+            }
+        } catch (Exception e) {
+            System.out.println("Can't write to file");
+        }
     }
 }
