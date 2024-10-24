@@ -41,7 +41,8 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehiclesByPrice(double min, double max) {
-        return null;
+        List<Vehicle> vehiclesInPriceRange = inventory.stream().filter(vehicle -> vehicle.getPrice() >= min && vehicle.getPrice() <= max).toList();
+        return vehiclesInPriceRange;
     }
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {

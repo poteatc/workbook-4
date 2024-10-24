@@ -77,18 +77,49 @@ public class UserInterface {
         } while (!done);
     }
 
-    private void displayVehicles(List<Vehicle> vehicles) {
+    private void printVehicleListHeader() {
         System.out.println(ColorCodes.GREEN + "\nVehicles\n~~~~~~~~" + ColorCodes.RESET);
         System.out.printf(ColorCodes.BLUE + "%-10s %-10s %-10s %-10s %-10s %-10s %-15s %5s\n",
                 "VIN", "Make", "Model", "Year", "Type", "Color", "Mileage", "Price");
         System.out.println("---------------------------------------------------------------------------------------" + ColorCodes.RESET);
+    }
+
+    private void displayVehicles(List<Vehicle> vehicles) {
+        printVehicleListHeader();
         for (Vehicle v: vehicles) {
             System.out.println(v);
         }
-        System.out.println();
     }
 
-    public void processGetByPriceRequest() {}
+    private double getPositiveDoubleInput(String input) {
+        double d = -1;
+        try {
+            d = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a floating point number (Ex. 100, 54321.09, 123.50)");
+        }
+        if (d < 0) {
+            System.out.println("Please enter a positive number...");
+            d = -1;
+        }
+        return d;
+    }
+
+    public void processGetByPriceRequest() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter the minimum price: ");
+        String input = scanner.nextLine().trim();
+        double min = getPositiveDoubleInput(input);
+        if (min == -1) return;
+
+        System.out.print("Please enter the minimum price: ");
+        input = scanner.nextLine().trim();
+        double max = getPositiveDoubleInput(input);
+        if (max == -1) return;
+
+        displayVehicles(dealership.getVehiclesByPrice(min, max));
+    }
+
     public void processGetByMakeModelRequest() {}
     public void processGetByYearRequest() {}
     public void processGetByColorRequest() {}
