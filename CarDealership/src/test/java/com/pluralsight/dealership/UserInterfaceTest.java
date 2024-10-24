@@ -23,6 +23,6 @@ class UserInterfaceTest {
 
     @Test
     void processGetByPriceRequest() {
-        d.addVehicle();
+        //d.addVehicle();
     }
 }

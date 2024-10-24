@@ -1,5 +1,7 @@
 package com.pluralsight.dealership;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -10,7 +12,7 @@ public class UserInterface {
     }
 
     private void init() {
-        dealership = new DealershipFileManager().getDealership();
+        this.dealership = new DealershipFileManager().getDealership();
     }
 
     public void display() {
@@ -21,11 +23,64 @@ public class UserInterface {
                     ~~~~~~~~~~~~~~~~~~~~
                     |       Menu       |
                     ~~~~~~~~~~~~~~~~~~~~
-                    
+                    Please enter an option:
+                    A) Filter vehicles by price
+                    B) Filter vehicles by make and model
+                    C) Filter vehicles by year
+                    D) Filter vehicles by color
+                    E) Filter vehicles by mileage
+                    F) Filter vehicles by type
+                    G) Show all vehicles
+                    H) Add new vehicle to dealership
+                    I) Remove vehicle from dealership
+                    X) Exit application
                     """);
             Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine().toLowerCase().trim();
+            switch (input) {
+                case "a":
+                    processGetByPriceRequest();
+                    break;
+                case "b":
+                    processGetByMakeModelRequest();
+                    break;
+                case "c":
+                    processGetByYearRequest();
+                    break;
+                case "d":
+                    processGetByColorRequest();
+                    break;
+                case "e":
+                    processGetByMileageRequest();
+                    break;
+                case "f":
+                    processGetByVehicleTypeRequest();
+                    break;
+                case "g":
+                    processGetAllVehiclesRequest();
+                    break;
+                case "h":
+                    processAddVehicleRequest();
+                    break;
+                case "i":
+                    processRemoveVehicleRequest();
+                    break;
+                case "x":
+                    System.out.println("Exiting application...");
+                    done = true;
+                    break;
+                default:
+                    System.out.println("Please enter a valid choice (A, B, C, D, E, F, G, H, I, or X):");
+                    break;
+            }
 
         } while (!done);
+    }
+
+    private void displayVehicles(List<Vehicle> vehicles) {
+        for (Vehicle v: vehicles) {
+            System.out.println(v);
+        }
     }
 
     public void processGetByPriceRequest() {}
@@ -34,7 +89,11 @@ public class UserInterface {
     public void processGetByColorRequest() {}
     public void processGetByMileageRequest() {}
     public void processGetByVehicleTypeRequest() {}
-    public void processGetAllVehiclesRequest() {}
+
+    public void processGetAllVehiclesRequest() {
+        displayVehicles(dealership.getAllVehicles());
+    }
+
     public void processAddVehicleRequest() {}
     public void processRemoveVehicleRequest() {}
 }
