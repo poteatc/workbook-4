@@ -6,15 +6,16 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Dealership dealership;
-    DealershipFileManager dealershipFileManager;
+    //DealershipFileManager dealershipFileManager;
 
     public UserInterface() {
 
     }
 
     private void init() {
-        this.dealershipFileManager = new DealershipFileManager();
-        this.dealership = dealershipFileManager.getDealership();
+        this.dealership = new DealershipFileManager().getDealership();
+        //this.dealershipFileManager = new DealershipFileManager();
+        //this.dealership = dealershipFileManager.getDealership();
     }
 
     public void display() {
@@ -215,7 +216,8 @@ public class UserInterface {
         Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, mileage, price);
         dealership.addVehicle(vehicle);
 
-        dealershipFileManager.saveDealership(dealership);
+        //DealershipFileManager.saveDealership(dealership);
+        new DealershipFileManager().saveDealership(dealership);
     }
     public void processRemoveVehicleRequest() {}
 

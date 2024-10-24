@@ -37,7 +37,7 @@ public class DealershipFileManager {
 
     public void saveDealership(Dealership dealership) {
         try {
-            FileWriter fw = new FileWriter("src/main/resources/inventory-backup.csv");
+            FileWriter fw = new FileWriter("./src/main/resources/inventory-backup.csv");
             BufferedWriter bw = new BufferedWriter(fw);
             // Write first line of csv
             bw.write(String.format("%s|%s|%s\n", dealership.getName(), dealership.getAddress(), dealership.getPhone()));
@@ -45,6 +45,7 @@ public class DealershipFileManager {
             for (Vehicle v : dealership.getAllVehicles()) {
                 bw.write(v.toCSVFormat() + "\n");
             }
+            bw.close();
         } catch (Exception e) {
             System.out.println("Can't write to file");
         }
