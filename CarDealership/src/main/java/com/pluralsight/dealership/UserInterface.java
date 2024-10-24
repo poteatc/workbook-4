@@ -76,7 +76,7 @@ public class UserInterface {
         double min = getPositiveDoubleInput(input);
         if (min == -1) return;
 
-        System.out.print("Please enter the minimum price: ");
+        System.out.print("Please enter the maximum price: ");
         input = scanner.nextLine().trim();
         double max = getPositiveDoubleInput(input);
         if (max == -1) return;
@@ -105,10 +105,75 @@ public class UserInterface {
             displayVehicles(vehiclesByMakeModel);
         }
     }
-    public void processGetByYearRequest() {}
-    public void processGetByColorRequest() {}
-    public void processGetByMileageRequest() {}
-    public void processGetByVehicleTypeRequest() {}
+
+    public void processGetByYearRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter the minimum year: ");
+        String input = scanner.nextLine().trim();
+        int min = getPositiveIntegerInput(input);
+        if (min == -1) return;
+
+        System.out.print("Please enter the maximum price: ");
+        input = scanner.nextLine().trim();
+        int max = getPositiveIntegerInput(input);
+        if (max == -1) return;
+
+        List<Vehicle> vehiclesByYear = dealership.getVehiclesByYear(min, max);
+        if (vehiclesByYear.isEmpty()) {
+            System.out.println("There are no vehicles within those years...");
+        } else {
+            displayVehicles(vehiclesByYear);
+        }
+    }
+
+    public void processGetByColorRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter the color of the vehicle: ");
+        String color = scanner.nextLine().trim().toLowerCase();
+
+        List<Vehicle> vehiclesByColor = dealership.getVehiclesByColor(color);
+        if (vehiclesByColor.isEmpty()) {
+            System.out.println("There are no vehicles with that color...");
+        } else {
+            displayVehicles(vehiclesByColor);
+        }
+    }
+
+    public void processGetByMileageRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter the minimum mileage: ");
+        String input = scanner.nextLine().trim();
+        int min = getPositiveIntegerInput(input);
+        if (min == -1) return;
+
+        System.out.print("Please enter the maximum mileage: ");
+        input = scanner.nextLine().trim();
+        int max = getPositiveIntegerInput(input);
+        if (max == -1) return;
+
+        List<Vehicle> vehiclesByMileage = dealership.getVehiclesByMileage(min, max);
+        if (vehiclesByMileage.isEmpty()) {
+            System.out.println("There are no vehicles within that mileage range...");
+        } else {
+            displayVehicles(vehiclesByMileage);
+        }
+    }
+    public void processGetByVehicleTypeRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter the vehicle type: ");
+        String type = scanner.nextLine().trim().toLowerCase();
+
+        List<Vehicle> vehiclesByType = dealership.getVehiclesByType(type);
+        if (vehiclesByType.isEmpty()) {
+            System.out.println("There are no vehicles with that type...");
+        } else {
+            displayVehicles(vehiclesByType);
+        }
+    }
 
     public void processGetAllVehiclesRequest() {
         displayVehicles(dealership.getAllVehicles());

@@ -53,19 +53,23 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehiclesByYear(int min, int max) {
-        return null;
+        List<Vehicle> vehiclesInYearRange = inventory.stream().filter(vehicle -> vehicle.getYear() >= min && vehicle.getYear() <= max).toList();
+        return vehiclesInYearRange;
     }
 
     public List<Vehicle> getVehiclesByColor(String color) {
-        return null;
+        List<Vehicle> vehiclesWithColor = inventory.stream().filter(vehicle -> vehicle.getColor().equalsIgnoreCase(color)).toList();
+        return vehiclesWithColor;
     }
 
-    public List<Vehicle> getVehiclesByMileage(double min, double max) {
-        return null;
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+        List<Vehicle> vehiclesInMileageRange = inventory.stream().filter(vehicle -> vehicle.getOdometer() >= min && vehicle.getOdometer() <= max).toList();
+        return vehiclesInMileageRange;
     }
 
     public List<Vehicle> getVehiclesByType(String vehicleType) {
-        return null;
+        List<Vehicle> vehiclesOfType = inventory.stream().filter(vehicle -> vehicle.getVehicleType().equalsIgnoreCase(vehicleType)).toList();
+        return vehiclesOfType;
     }
 
     public List<Vehicle> getAllVehicles() {
