@@ -19,22 +19,7 @@ public class UserInterface {
         init();
         boolean done = false;
         do {
-            System.out.println("""
-                    ~~~~~~~~~~~~~~~~~~~~
-                    |       Menu       |
-                    ~~~~~~~~~~~~~~~~~~~~
-                    Please enter an option:
-                    A) Filter vehicles by price
-                    B) Filter vehicles by make and model
-                    C) Filter vehicles by year
-                    D) Filter vehicles by color
-                    E) Filter vehicles by mileage
-                    F) Filter vehicles by type
-                    G) Show all vehicles
-                    H) Add new vehicle to dealership
-                    I) Remove vehicle from dealership
-                    X) Exit application
-                    """);
+            printMenuPrompt();
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine().toLowerCase().trim();
             switch (input) {
@@ -77,18 +62,87 @@ public class UserInterface {
         } while (!done);
     }
 
-    private void printVehicleListHeader() {
-        System.out.println(ColorCodes.GREEN + "\nVehicles\n~~~~~~~~" + ColorCodes.RESET);
-        System.out.printf(ColorCodes.BLUE + "%-10s %-10s %-10s %-10s %-10s %-10s %-15s %5s\n",
-                "VIN", "Make", "Model", "Year", "Type", "Color", "Mileage", "Price");
-        System.out.println("---------------------------------------------------------------------------------------" + ColorCodes.RESET);
-    }
-
     private void displayVehicles(List<Vehicle> vehicles) {
         printVehicleListHeader();
         for (Vehicle v: vehicles) {
             System.out.println(v);
         }
+    }
+
+    public void processGetByPriceRequest() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter the minimum price: ");
+        String input = scanner.nextLine().trim();
+        double min = getPositiveDoubleInput(input);
+        if (min == -1) return;
+
+        System.out.print("Please enter the minimum price: ");
+        input = scanner.nextLine().trim();
+        double max = getPositiveDoubleInput(input);
+        if (max == -1) return;
+
+        List<Vehicle> vehiclesByPrice = dealership.getVehiclesByPrice(min, max);
+        if (vehiclesByPrice.isEmpty()) {
+            System.out.println("There are no vehicles within that price range...");
+        } else {
+            displayVehicles(vehiclesByPrice);
+        }
+    }
+
+    public void processGetByMakeModelRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter the make (brand) of the vehicle: ");
+        String make = scanner.nextLine().trim().toLowerCase();
+
+        System.out.print("Please enter the model: ");
+        String model = scanner.nextLine().trim().toLowerCase();
+
+        List<Vehicle> vehiclesByMakeModel = dealership.getVehiclesByMakeModel(make, model);
+        if (vehiclesByMakeModel.isEmpty()) {
+            System.out.println("There are no vehicles with that make and model...");
+        } else {
+            displayVehicles(vehiclesByMakeModel);
+        }
+    }
+    public void processGetByYearRequest() {}
+    public void processGetByColorRequest() {}
+    public void processGetByMileageRequest() {}
+    public void processGetByVehicleTypeRequest() {}
+
+    public void processGetAllVehiclesRequest() {
+        displayVehicles(dealership.getAllVehicles());
+    }
+
+    public void processAddVehicleRequest() {}
+    public void processRemoveVehicleRequest() {}
+
+    // Helper methods
+
+    private void printMenuPrompt() {
+        System.out.println("""
+                    ~~~~~~~~~~~~~~~~~~~~
+                    |       Menu       |
+                    ~~~~~~~~~~~~~~~~~~~~
+                    Please enter an option:
+                    A) Filter vehicles by price
+                    B) Filter vehicles by make and model
+                    C) Filter vehicles by year
+                    D) Filter vehicles by color
+                    E) Filter vehicles by mileage
+                    F) Filter vehicles by type
+                    G) Show all vehicles
+                    H) Add new vehicle to dealership
+                    I) Remove vehicle from dealership
+                    X) Exit application
+                    """);
+    }
+
+    private void printVehicleListHeader() {
+        System.out.println(ColorCodes.GREEN + "\nVehicles\n~~~~~~~~" + ColorCodes.RESET);
+        System.out.printf(ColorCodes.BLUE + "%-10s %-10s %-10s %-10s %-10s %-10s %-15s %5s\n",
+                "VIN", "Make", "Model", "Year", "Type", "Color", "Mileage", "Price");
+        System.out.println("---------------------------------------------------------------------------------------" + ColorCodes.RESET);
     }
 
     private double getPositiveDoubleInput(String input) {
@@ -105,31 +159,17 @@ public class UserInterface {
         return d;
     }
 
-    public void processGetByPriceRequest() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter the minimum price: ");
-        String input = scanner.nextLine().trim();
-        double min = getPositiveDoubleInput(input);
-        if (min == -1) return;
-
-        System.out.print("Please enter the minimum price: ");
-        input = scanner.nextLine().trim();
-        double max = getPositiveDoubleInput(input);
-        if (max == -1) return;
-
-        displayVehicles(dealership.getVehiclesByPrice(min, max));
+    private int getPositiveIntegerInput(String input) {
+        int i = -1;
+        try {
+            i = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter an integer number (Ex. 10, 987, 1234)");
+        }
+        if (i < 0) {
+            System.out.println("Please enter a positive number...");
+            i = -1;
+        }
+        return i;
     }
-
-    public void processGetByMakeModelRequest() {}
-    public void processGetByYearRequest() {}
-    public void processGetByColorRequest() {}
-    public void processGetByMileageRequest() {}
-    public void processGetByVehicleTypeRequest() {}
-
-    public void processGetAllVehiclesRequest() {
-        displayVehicles(dealership.getAllVehicles());
-    }
-
-    public void processAddVehicleRequest() {}
-    public void processRemoveVehicleRequest() {}
 }
