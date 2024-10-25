@@ -3,10 +3,10 @@ package com.pluralsight.dealership;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserInterface {
     private Dealership dealership;
-    //DealershipFileManager dealershipFileManager;
 
     public UserInterface() {
 
@@ -14,8 +14,6 @@ public class UserInterface {
 
     private void init() {
         this.dealership = new DealershipFileManager().getDealership();
-        //this.dealershipFileManager = new DealershipFileManager();
-        //this.dealership = dealershipFileManager.getDealership();
     }
 
     public void display() {
@@ -216,13 +214,23 @@ public class UserInterface {
         Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, mileage, price);
         dealership.addVehicle(vehicle);
 
-        //DealershipFileManager.saveDealership(dealership);
         new DealershipFileManager().saveDealership(dealership);
     }
-    public void processRemoveVehicleRequest() {}
+
+    public void processRemoveVehicleRequest() {
+        System.out.println("Please enter the VIN number of the vehicle to remove from the dealership: ");
+        Scanner scanner = new Scanner(System.in);
+        int vin = getPositiveIntegerInput(scanner.nextLine());
+
+        // get a filtered list of all vehicles with the same vin as the input then remove them all from dealership
+        List<Vehicle> filtered = dealership.getAllVehicles().stream().filter(vehicle -> vehicle.getVin() == vin).toList();
+        dealership.getAllVehicles().removeAll(filtered);
+
+        System.out.println("Successfully removed the vehicle with VIN #" + vin);
+        new DealershipFileManager().saveDealership(dealership);
+    }
 
     // Helper methods
-
     private void printMenuPrompt() {
         System.out.println("""
                     ~~~~~~~~~~~~~~~~~~~~
