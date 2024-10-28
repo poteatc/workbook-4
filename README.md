@@ -61,6 +61,9 @@ Once the application is running, you will be presented with a menu to choose fro
 - **Removing a vehicle**: Enter the VIN of the vehicle to remove it from inventory.
   ![image](https://github.com/user-attachments/assets/c9205299-0f99-434a-9a4c-9818badc6acf)
 
+### Erroneous input example for price range
+  ![image](https://github.com/user-attachments/assets/730282c9-ec22-4543-b7c2-7ab547cdd35a)
+
 
 ## Interesting code
 ### Stream-based Filtering in Inventory Search
