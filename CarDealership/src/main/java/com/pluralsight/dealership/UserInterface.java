@@ -1,9 +1,7 @@
 package com.pluralsight.dealership;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserInterface {
     private Dealership dealership; // Reference to the dealership object
@@ -257,9 +255,9 @@ public class UserInterface {
     private void printMenuPrompt() {
         // Displays the menu options to the user
         System.out.println("""
-                    ~~~~~~~~~~~~~~~~~~~~       
+                    ~~~~~~~~~~~~~~~~~~~~
                     |       Menu       |
-                    ~~~~~~~~~~~~~~~~~~~~       
+                    ~~~~~~~~~~~~~~~~~~~~
                     Please enter an option:
                     A) Filter vehicles by price
                     B) Filter vehicles by make and model

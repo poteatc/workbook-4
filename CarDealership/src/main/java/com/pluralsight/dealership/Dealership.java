@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dealership {
-    private String name; // Dealership name
-    private String address; // Dealership address
-    private String phone; // Dealership contact phone
-    private ArrayList<Vehicle> inventory; // List of vehicles available in the dealership's inventory
+    private final String name; // Dealership name
+    private final String address; // Dealership address
+    private final String phone; // Dealership contact phone
+    private final ArrayList<Vehicle> inventory; // List of vehicles available in the dealership's inventory
 
     public Dealership(String name, String address, String phone) {
         this.name = name;
@@ -20,72 +20,54 @@ public class Dealership {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     // Filters inventory by price range and returns list of matching vehicles
     public List<Vehicle> getVehiclesByPrice(double min, double max) {
-        List<Vehicle> vehiclesInPriceRange = inventory.stream()
+        return inventory.stream()
                 .filter(vehicle -> vehicle.getPrice() >= min && vehicle.getPrice() <= max)
                 .toList();
-        return vehiclesInPriceRange;
     }
 
     // Filters inventory by make and model and returns list of matching vehicles
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
-        List<Vehicle> vehiclesWithMakeAndModel = inventory.stream().filter(
+        return inventory.stream().filter(
                 vehicle -> vehicle.getMake().trim().equalsIgnoreCase(make)
                         && vehicle.getModel().trim().equalsIgnoreCase(model)).toList();
-        return vehiclesWithMakeAndModel;
     }
 
     // Filters inventory by year range and returns list of matching vehicles
     public List<Vehicle> getVehiclesByYear(int min, int max) {
-        List<Vehicle> vehiclesInYearRange = inventory.stream()
+        return inventory.stream()
                 .filter(vehicle -> vehicle.getYear() >= min && vehicle.getYear() <= max)
                 .toList();
-        return vehiclesInYearRange;
     }
 
     // Filters inventory by color and returns list of matching vehicles
     public List<Vehicle> getVehiclesByColor(String color) {
-        List<Vehicle> vehiclesWithColor = inventory.stream()
+        return inventory.stream()
                 .filter(vehicle -> vehicle.getColor().equalsIgnoreCase(color))
                 .toList();
-        return vehiclesWithColor;
     }
 
     // Filters inventory by mileage range and returns list of matching vehicles
     public List<Vehicle> getVehiclesByMileage(int min, int max) {
-        List<Vehicle> vehiclesInMileageRange = inventory.stream()
+        return inventory.stream()
                 .filter(vehicle -> vehicle.getOdometer() >= min && vehicle.getOdometer() <= max)
                 .toList();
-        return vehiclesInMileageRange;
     }
 
     // Filters inventory by vehicle type and returns list of matching vehicles
     public List<Vehicle> getVehiclesByType(String vehicleType) {
-        List<Vehicle> vehiclesOfType = inventory.stream()
+        return inventory.stream()
                 .filter(vehicle -> vehicle.getVehicleType().equalsIgnoreCase(vehicleType))
                 .toList();
-        return vehiclesOfType;
     }
 
     // Returns entire vehicle inventory
