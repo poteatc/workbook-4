@@ -42,9 +42,35 @@ Once the application is running, you will be presented with a menu to choose fro
 - **I) Remove vehicle from dealership**
 - **X) Exit application**
 
+## Menu screenshot
+![image](https://github.com/user-attachments/assets/11794b15-2e82-4a7f-9790-e21ea3813864)
+
+## Showing all vehicles screenshot
+![image](https://github.com/user-attachments/assets/0d566fb5-e376-4e1f-b077-9c9a425fef4e)
+
+
+
 ### Example Commands
 
 - **Filtering by price**: Enter a minimum and maximum price to view vehicles within that range.
+  ![image](https://github.com/user-attachments/assets/c634466e-8eee-4718-a47b-0cb0f2b1c27f)
+
 - **Adding a vehicle**: Follow prompts to enter vehicle details (e.g., VIN, make, model, year, color, mileage, and price).
+  ![image](https://github.com/user-attachments/assets/73e4039b-e79a-40dd-8f53-05b0b28ac4c6)
+
 - **Removing a vehicle**: Enter the VIN of the vehicle to remove it from inventory.
+  ![image](https://github.com/user-attachments/assets/c9205299-0f99-434a-9a4c-9818badc6acf)
+
+
+## Interesting code
+### Stream-based Filtering in Inventory Search
+
+This project uses Java Streams to efficiently filter the `inventory` list based on conditions like price range or make and model. Here’s why this approach is beneficial:
+
+- **Efficient Processing**: The `Stream` API applies filtering only when necessary (lazy evaluation), which can be faster than traditional loops, especially for large datasets.
+- **Readable and Concise**: By using `.filter()` with lambda expressions, the code is cleaner and follows functional programming principles, enhancing readability and reducing complexity.
+- **Immutable Results**: The `.toList()` method creates a new list with the filtered items, leaving the original inventory unchanged, which is safer and more predictable.
+
+![image](https://github.com/user-attachments/assets/6cde6d88-aa54-4937-9d5f-788af799ee10)
+
 
